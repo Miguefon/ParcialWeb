@@ -8,14 +8,10 @@ const VehiculoController = require('../controller/VehiculosController');
 router.get('/', VehiculoController.getAllVehiculos);
 
 //get by id
-router.get('//:id', VehiculoController.getVehiculosById);
+router.get('/:id', VehiculoController.getVehiculosById);
 
 // crear vehiculo
 router.post('/addvehiculo', VehiculoController.addVehiculo);
-
-// get by placa
-router.get('/:placa', VehiculoController.getVehiculosByPlaca);
-
 
 // actualizar datos
 router.put('/:id', VehiculoController.updateCarro);

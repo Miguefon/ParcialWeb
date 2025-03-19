@@ -27,24 +27,8 @@ const getAllVehiculos = async (req, res) => {
 const getVehiculosById = async (req, res) => {
     try {
         const {id} = req.params;
-        const libro = await libro.findOne({
+        const vehiculo = await Vehiculo.findOne({
             where: {id}
-        });
-        if (libro) {
-            return res.status(200).json(libro);
-        } else {
-            return res.status(404).send("Vehiculo no encontrado");
-        }
-    } catch (error) {
-        return res.status(500).send(error.message);
-    }
-}
-
-const getVehiculosByPlaca=  async (req, res) => {
-    try {
-        const {placa} = req.params;
-        const vehiculo = await libro.findOne({
-            where: {placa}
         });
         if (vehiculo) {
             return res.status(200).json(vehiculo);
@@ -55,6 +39,8 @@ const getVehiculosByPlaca=  async (req, res) => {
         return res.status(500).send(error.message);
     }
 }
+
+
 
 const updateCarro = async(req, res) =>{
     try {
@@ -70,8 +56,8 @@ const updateCarro = async(req, res) =>{
         if (modelo) vehiculo.modelo = modelo;
         if(cilindraje) vehiculo.cilindraje=cilindraje;
         if(impuesto_base) vehiculo.impuesto_base=impuesto_base;
-        await usuario.save();
-        return res.status(200).json({message:"Usuario actualizado", usuario})
+        await vehiculo.save();
+        return res.status(200).json({message:"Vehiculo actualizado", Vehiculo})
     } catch (error) {
         res.status(500).json({error: error.message})
 
@@ -80,7 +66,7 @@ const updateCarro = async(req, res) =>{
 
 const changeStatusVehiculo = async (req, res) => {
     try {
-        const { id } = req.params; // ID del usuario recibido en la URL
+        const { id } = req.params; // ID del vehiculo recibido en la URL
         const { estado } = req.body; // Estado recibido en el cuerpo de la petición
 
         // Validar que el estado sea "Activo" o "Inactivo"
@@ -108,7 +94,6 @@ const changeStatusVehiculo = async (req, res) => {
 module.exports = {
     addVehiculo, 
     getAllVehiculos, 
-    getVehiculosById, 
-    getVehiculosByPlaca,
+    getVehiculosById,
     updateCarro,
     changeStatusVehiculo }
